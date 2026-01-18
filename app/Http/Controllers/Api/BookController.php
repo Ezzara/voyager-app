@@ -7,43 +7,54 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // List all books
     public function index()
     {
-        //
+        return Book::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Store a new book
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'published_date' => 'required|date',
+        ]);
+
+        $book = Book::create($validated);
+
+        return response()->json($book, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Show a single book
+    public function show($id)
     {
-        //
+        return Book::findOrFail($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Update a book
+    public function update(Request $request, $id)
     {
-        //
+        $book = Book::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string',
+            'author' => 'sometimes|required|string',
+            'published_date' => 'sometimes|required|date',
+        ]);
+
+        $book->update($validated);
+
+        return response()->json($book);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Delete a book
+    public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return response()->json(null, 204);
     }
 }
