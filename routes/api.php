@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Book Controller
-use App\Http\Controllers\BookController; 
+use App\Http\Controllers\Api\BookController; 
 
 
 Route::get('/user', function (Request $request) {
