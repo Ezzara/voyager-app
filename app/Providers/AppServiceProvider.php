@@ -20,7 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //fix string length database problem
         Schema::defaultStringLength(191);
+        //forcing https on prod
+        if (env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+        }
+
     }
 }
