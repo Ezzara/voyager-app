@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("author");
             $table->date('publish_date');
         });
+        
     }
 
     /**
