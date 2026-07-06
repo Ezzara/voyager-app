@@ -48,6 +48,17 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
+        // test mailer with gmail smtp for development and testing
+        'test' => [
+            'transport' => env('MAILER_TEST', 'smtp'),
+            'host' => env('MAIL_HOST_TEST', 'smtp.gmail.com'),
+            'port' => env('MAIL_PORT_TEST', 587),
+            'encryption' => env('MAIL_ENCRYPTION_TEST', 'tls'),
+            'username' => env('MAIL_USERNAME_TEST'),
+            'password' => env('MAIL_PASSWORD_TEST'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
 
         'ses' => [
             'transport' => 'ses',
