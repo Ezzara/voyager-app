@@ -20,7 +20,7 @@ class TuitionNotifyGmailTest extends Command
             try {
                 Mail::mailer('test')
                     ->to($student->email)
-                    ->send(new TuitionReminder($student));
+                    ->send(new TuitionReminderMail($student));
 
                 $this->info("Gmail test mail sent to {$student->name}");
             } catch (\Exception $e) {
